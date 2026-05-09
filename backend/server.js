@@ -1,6 +1,6 @@
 import app from "./src/app.js";
 import connectDB from "./src/db/db.js";
-import authRoutes from "./routes/authRoutes.js";
+import authRoutes from "./src/routes/authRoutes.js";
 
 
 connectDB();
