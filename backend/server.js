@@ -1,9 +1,12 @@
+import app from "./src/app.js";
+import connectDB from "./src/db/db.js";
+import authRoutes from "./routes/authRoutes.js";
 
-const app = require ("./src/app.js")
-const connectDB = require("./src/db/db")
 
-connectDB()
-app.listen(3000, ()=>{
+connectDB();
+app.use("/api/auth", authRoutes);
 
-    console.log(" Server is live")
-})
+
+app.listen(3000, () => {
+  console.log("Server is live");
+});
