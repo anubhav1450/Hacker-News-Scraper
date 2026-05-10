@@ -1,6 +1,10 @@
 import "./Home.css";
 
-import { useContext, useEffect, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import { AuthContext } from "../context/AuthContext";
 
@@ -17,7 +21,7 @@ function Bookmarks() {
     try {
 
       const response = await axios.get(
-        "http://localhost:3000/api/stories"
+        "https://hacker-news-scraper-api.onrender.com/api/stories"
       );
 
       const bookmarkedStories =

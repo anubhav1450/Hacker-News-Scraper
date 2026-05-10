@@ -55,16 +55,14 @@ function Register() {
 
     try {
 
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/register",
+      await axios.post(
+        "https://hacker-news-scraper-api.onrender.com/api/auth/register",
         {
           name,
           email,
           password,
         }
       );
-
-      console.log(response.data);
 
       navigate("/login");
 

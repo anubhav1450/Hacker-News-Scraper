@@ -33,7 +33,7 @@ function Home() {
     try {
 
       const response = await axios.get(
-        "http://localhost:3000/api/stories"
+        "https://hacker-news-scraper-api.onrender.com/api/stories"
       );
 
       setStories(response.data);
@@ -52,7 +52,7 @@ function Home() {
       setLoading(true);
 
       await axios.post(
-        "http://localhost:3000/api/stories/scrape"
+        "https://hacker-news-scraper-api.onrender.com/api/stories/scrape"
       );
 
       await fetchStories();
@@ -82,7 +82,7 @@ function Home() {
     try {
 
       await axios.post(
-        `http://localhost:3000/api/stories/${storyId}/bookmark`,
+        `https://hacker-news-scraper-api.onrender.com/api/stories/${storyId}/bookmark`,
         {},
         {
           headers: {
