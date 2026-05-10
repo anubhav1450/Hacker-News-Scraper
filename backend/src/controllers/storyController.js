@@ -1,5 +1,5 @@
 import Story from "../models/Story.js";
-import scrapeStories from "../../../frontend/src/utils/scraper.js";
+import scrapeStories from "../utils/scraper.js";
 
 export const scrapeNews = async (req, res) => {
 
