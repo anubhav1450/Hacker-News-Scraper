@@ -7,14 +7,17 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
     try {
+
+      setError("");
 
       const response = await axios.post(
         "http://localhost:3000/api/auth/login",
@@ -38,7 +41,7 @@ function Login() {
 
     } catch (error) {
 
-      console.log(error.response.data);
+      setError(error.response.data.message);
 
     }
   };
@@ -73,6 +76,14 @@ function Login() {
           <button type="submit" className="login-button">
             Login
           </button>
+
+          {
+            error && (
+              <p className="error-text">
+                {error}
+              </p>
+            )
+          }
 
         </form>
 
