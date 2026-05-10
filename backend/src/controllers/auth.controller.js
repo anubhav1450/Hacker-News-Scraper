@@ -50,7 +50,7 @@ export const registerUser = async (req, res) => {
         expiresIn: "7d",
       }
     );
-a
+
     res.status(201).json({
       message: "User registered successfully",
       token,
