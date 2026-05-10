@@ -1,3 +1,5 @@
+// Home.jsx
+
 import "./Home.css";
 
 import { useContext, useEffect, useState } from "react";
@@ -50,10 +52,6 @@ function Home() {
     try {
 
       setLoading(true);
-
-      await axios.post(
-        "https://hacker-news-scraper-api.onrender.com/api/stories/scrape"
-      );
 
       await fetchStories();
 
