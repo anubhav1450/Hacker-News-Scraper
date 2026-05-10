@@ -1,26 +1,45 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+
+import {
+  Link,
+  useNavigate,
+} from "react-router-dom";
+
+import {
+  useState,
+  useContext,
+} from "react";
+
 import axios from "axios";
+
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
 
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
+
   const [error, setError] = useState("");
-  const { login } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
-    try {
+    setError("");
 
-      setError("");
+    if (!email || !password) {
+
+      setError("All fields are required");
+
+      return;
+    }
+
+    try {
 
       const response = await axios.post(
         "http://localhost:3000/api/auth/login",
@@ -31,9 +50,9 @@ function Login() {
       );
 
       login(
-    response.data.user,
-    response.data.token
-  );
+        response.data.user,
+        response.data.token
+      );
 
       navigate("/");
 
@@ -42,6 +61,13 @@ function Login() {
       setError(error.response.data.message);
 
     }
+  };
+
+  const fillDemoCredentials = () => {
+
+    setEmail("ak@gmail.com");
+
+    setPassword("123456");
   };
 
   return (
@@ -53,14 +79,19 @@ function Login() {
           Hacker News
         </h1>
 
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form
+          className="login-form"
+          onSubmit={handleSubmit}
+        >
 
           <input
             type="email"
             placeholder="Enter email"
             className="login-input"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
           />
 
           <input
@@ -68,11 +99,24 @@ function Login() {
             placeholder="Enter password"
             className="login-input"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
           />
 
-          <button type="submit" className="login-button">
+          <button
+            type="submit"
+            className="login-button"
+          >
             Login
+          </button>
+
+          <button
+            type="button"
+            className="demo-button"
+            onClick={fillDemoCredentials}
+          >
+            Use Demo Credentials
           </button>
 
           {
@@ -86,10 +130,16 @@ function Login() {
         </form>
 
         <p className="login-text">
+
           Don't have an account?{" "}
-          <Link to="/register" className="login-link">
+
+          <Link
+            to="/register"
+            className="login-link"
+          >
             Register
           </Link>
+
         </p>
 
       </div>
