@@ -1,19 +1,57 @@
 import "./Register.css";
-import { Link, useNavigate } from "react-router-dom";
+
+import {
+  Link,
+  useNavigate,
+} from "react-router-dom";
+
 import { useState } from "react";
+
 import axios from "axios";
 
 function Register() {
 
   const [name, setName] = useState("");
+
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
+
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
 
     e.preventDefault();
+
+    setError("");
+
+    if (!name || !email || !password) {
+
+      setError("All fields are required");
+
+      return;
+    }
+
+    const emailRegex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+
+      setError("Invalid email format");
+
+      return;
+    }
+
+    if (password.length < 6) {
+
+      setError(
+        "Password must be at least 6 characters"
+      );
+
+      return;
+    }
 
     try {
 
@@ -32,7 +70,7 @@ function Register() {
 
     } catch (error) {
 
-      console.log(error.response.data);
+      setError(error.response.data.message);
 
     }
   };
@@ -56,7 +94,9 @@ function Register() {
             placeholder="Enter name"
             className="register-input"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) =>
+              setName(e.target.value)
+            }
           />
 
           <input
@@ -64,7 +104,9 @@ function Register() {
             placeholder="Enter email"
             className="register-input"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
           />
 
           <input
@@ -84,16 +126,27 @@ function Register() {
             Register
           </button>
 
+          {
+            error && (
+              <p className="error-text">
+                {error}
+              </p>
+            )
+          }
+
         </form>
 
         <p className="register-text">
+
           Already have an account?{" "}
+
           <Link
             to="/login"
             className="register-link"
           >
             Login
           </Link>
+
         </p>
 
       </div>

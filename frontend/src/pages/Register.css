@@ -53,3 +53,10 @@
   text-decoration: none;
   font-weight: bold;
 }
+.error-text {
+  color: red;
+
+  text-align: center;
+
+  margin-top: 10px;
+}
