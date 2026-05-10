@@ -1,4 +1,5 @@
 import Story from "../models/Story.js";
+
 import scrapeStories from "../utils/scraper.js";
 
 export const scrapeNews = async (req, res) => {
@@ -37,6 +38,33 @@ export const getStories = async (req, res) => {
 
   }
 };
+
+export const getSingleStory = async (req, res) => {
+
+  try {
+
+    const story = await Story.findById(
+      req.params.id
+    );
+
+    if (!story) {
+
+      return res.status(404).json({
+        message: "Story not found",
+      });
+    }
+
+    res.status(200).json(story);
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message,
+    });
+
+  }
+};
+
 export const toggleBookmark = async (req, res) => {
 
   try {
