@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -8,6 +10,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { login } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -27,15 +30,10 @@ function Login() {
         }
       );
 
-      localStorage.setItem(
-        "token",
-        response.data.token
-      );
-
-      localStorage.setItem(
-        "user",
-        JSON.stringify(response.data.user)
-      );
+      login(
+    response.data.user,
+    response.data.token
+  );
 
       navigate("/");
 
