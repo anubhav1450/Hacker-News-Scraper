@@ -1,5 +1,6 @@
 .home-container {
   min-height: 100vh;
+
   background-color: #f6f6ef;
 }
 
@@ -19,14 +20,18 @@
   top: 0;
 
   z-index: 1000;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .logo {
   color: white;
 
-  font-size: 24px;
+  font-size: 26px;
 
   font-weight: bold;
+
+  letter-spacing: 0.5px;
 }
 
 .nav-right {
@@ -41,28 +46,36 @@
   color: white;
 
   font-size: 16px;
+
+  font-weight: 500;
 }
 
-.logout-button {
+.logout-button,
+.refresh-button {
   background-color: white;
 
   color: #ff6602;
 
   border: none;
 
-  padding: 10px 16px;
+  padding: 10px 18px;
 
-  border-radius: 6px;
+  border-radius: 8px;
 
   cursor: pointer;
 
   font-weight: bold;
 
-  transition: 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
-.logout-button:hover {
-  opacity: 0.9;
+.logout-button:hover,
+.refresh-button:hover {
+  transform: scale(1.05);
+
+  opacity: 0.95;
 }
 
 .bookmark-nav-link {
@@ -71,6 +84,14 @@
   text-decoration: none;
 
   font-weight: bold;
+
+  transition: opacity 0.2s ease;
+}
+
+.bookmark-nav-link:hover {
+  opacity: 0.85;
+
+  text-decoration: underline;
 }
 
 .home-content {
@@ -85,6 +106,18 @@
   color: #ff6602;
 
   margin-bottom: 10px;
+
+  font-size: 34px;
+}
+
+.top-bar {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
 }
 
 .stories-container {
@@ -94,7 +127,7 @@
 
   flex-direction: column;
 
-  gap: 20px;
+  gap: 24px;
 }
 
 .story-card {
@@ -102,17 +135,19 @@
 
   padding: 24px;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
-  transition: 0.2s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .story-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
 
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 .story-title {
@@ -127,20 +162,30 @@
   display: inline-block;
 
   margin-bottom: 14px;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .story-title:hover {
+  color: #e65c00;
+
   text-decoration: underline;
+
+  transform: translateX(2px);
 }
 
 .story-card p {
-  margin: 6px 0;
+  margin: 8px 0;
 
   color: #444;
+
+  line-height: 1.5;
 }
 
 .bookmark-button {
-  margin-top: 14px;
+  margin-top: 16px;
 
   padding: 10px 18px;
 
@@ -150,42 +195,28 @@
 
   border: none;
 
-  border-radius: 6px;
+  border-radius: 8px;
 
   cursor: pointer;
 
   font-weight: bold;
 
-  transition: 0.2s ease;
+  min-width: 140px;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .bookmark-button:hover {
-  opacity: 0.9;
+  transform: scale(1.05);
+
+  opacity: 0.95;
 }
 
 .active-bookmark {
-  background-color: black;
-}
-.top-bar {
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-}
-
-.refresh-button {
-  background-color: #ff6602;
+  background-color: #111827;
 
   color: white;
-
-  border: none;
-
-  padding: 10px 18px;
-
-  border-radius: 6px;
-
-  cursor: pointer;
-
-  font-weight: bold;
 }

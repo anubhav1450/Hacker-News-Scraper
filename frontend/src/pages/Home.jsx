@@ -79,6 +79,29 @@ function Home() {
       return;
     }
 
+    setStories((prevStories) =>
+      prevStories.map((story) => {
+
+        if (story._id === storyId) {
+
+          const alreadyBookmarked =
+            story.bookmarks?.includes(user?.id);
+
+          return {
+            ...story,
+
+            bookmarks: alreadyBookmarked
+              ? story.bookmarks.filter(
+                  (id) => id !== user?.id
+                )
+              : [...story.bookmarks, user?.id],
+          };
+        }
+
+        return story;
+      })
+    );
+
     try {
 
       await axios.post(
@@ -91,11 +114,11 @@ function Home() {
         }
       );
 
-      fetchStories();
-
     } catch (error) {
 
       console.log(error);
+
+      fetchStories();
 
     }
   };
@@ -229,8 +252,8 @@ function Home() {
                 >
                   {
                     story.bookmarks?.includes(user?.id)
-                      ? "Bookmarked"
-                      : "Bookmark"
+                      ? "Bookmarked ✓"
+                      : "Bookmark +"
                   }
                 </button>
 
