@@ -1,10 +1,9 @@
-// Home.jsx
-
 import "./Home.css";
 
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "../context/AuthContext";
+
 
 import {
   useNavigate,
@@ -23,6 +22,10 @@ function Home() {
 
   const navigate = useNavigate();
 
+  const [page, setPage] = useState(1);
+
+const [totalPages, setTotalPages] = useState(1);
+
   const handleLogout = () => {
 
     logout();
@@ -30,30 +33,31 @@ function Home() {
     navigate("/login");
   };
 
-  const fetchStories = async () => {
+ const fetchStories = async (currentPage = 1) => {
 
-    try {
+  try {
 
-      const response = await axios.get(
-        "https://hacker-news-scraper-api.onrender.com/api/stories"
-      );
+    const response = await axios.get(
+      `https://hacker-news-scraper-api.onrender.com/api/stories?page=${currentPage}&limit=10`
+    );
 
-      setStories(response.data);
+    setStories(response.data.stories || []);
 
-    } catch (error) {
+    setTotalPages(response.data.totalPages);
 
-      console.log(error);
+  } catch (error) {
 
-    }
-  };
+    console.log(error);
 
+  }
+};
   const handleRefresh = async () => {
 
     try {
 
       setLoading(true);
 
-      await fetchStories();
+      await fetchStories(page);
 
     } catch (error) {
 
@@ -116,16 +120,16 @@ function Home() {
 
       console.log(error);
 
-      fetchStories();
+      fetchStories(page);
 
     }
   };
 
   useEffect(() => {
 
-    fetchStories();
+    fetchStories(page);
 
-  }, []);
+  }, [page]);
 
   return (
     <div className="home-container">
@@ -210,7 +214,7 @@ function Home() {
         <div className="stories-container">
 
           {
-            stories.map((story) => (
+            stories?.map((story) => (
 
               <div
                 className="story-card"
@@ -258,6 +262,29 @@ function Home() {
               </div>
             ))
           }
+
+        </div>
+        <div className="pagination-container">
+
+        <button
+          className="pagination-button"
+          disabled={page === 1}
+          onClick={() => setPage(page - 1)}
+        >
+          Previous
+        </button>
+
+        <span className="page-number">
+          Page {page} of {totalPages}
+        </span>
+
+        <button
+          className="pagination-button"
+          disabled={page === totalPages}
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
 
         </div>
 
