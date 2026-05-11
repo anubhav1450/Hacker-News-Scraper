@@ -264,29 +264,6 @@ const [totalPages, setTotalPages] = useState(1);
           }
 
         </div>
-        <div className="pagination-container">
-
-        <button
-          className="pagination-button"
-          disabled={page === 1}
-          onClick={() => setPage(page - 1)}
-        >
-          Previous
-        </button>
-
-        <span className="page-number">
-          Page {page} of {totalPages}
-        </span>
-
-        <button
-          className="pagination-button"
-          disabled={page === totalPages}
-          onClick={() => setPage(page + 1)}
-        >
-          Next
-        </button>
-
-        </div>
 
       </div>
 
