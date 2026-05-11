@@ -41,7 +41,7 @@ const [totalPages, setTotalPages] = useState(1);
       `https://hacker-news-scraper-api.onrender.com/api/stories?page=${currentPage}&limit=10`
     );
 
-    setStories(response.data.stories || []);
+    setStories(response.data || []);
 
     setTotalPages(response.data.totalPages);
 
@@ -127,9 +127,9 @@ const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
 
-    fetchStories(page);
+    fetchStories();
 
-  }, [page]);
+  }, []);
 
   return (
     <div className="home-container">
